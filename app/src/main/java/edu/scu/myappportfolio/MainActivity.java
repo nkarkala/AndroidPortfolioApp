@@ -7,8 +7,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-
 public class MainActivity extends AppCompatActivity {
+
+
+    private Toast buttonInfoToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +20,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void respondToButtonClick(View view) {
-        Toast.makeText(this,"This button will launch " + view.getContentDescription(),Toast.LENGTH_SHORT).show();
+        if(buttonInfoToast!=null){
+            buttonInfoToast.cancel();
+        }
+        buttonInfoToast=Toast.makeText(this,"This button will launch " + view.getContentDescription(),Toast.LENGTH_SHORT);
+        buttonInfoToast.show();
     }
 
 
@@ -35,11 +41,7 @@ public class MainActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        
 
         return super.onOptionsItemSelected(item);
     }
